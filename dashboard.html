@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolaceSphere Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #dashboard {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        #dashboard-content {
+            background: linear-gradient(135deg, transparent, transparent);
+            padding: 50px;
+            border-radius: 25%;
+            box-shadow: 0 0 40px rgba(15, 1, 1, 0.2);
+            text-align: center;
+            width: 70%;
+            max-width: 780px;
+            transform: translateZ(100px);
+            transition: transform 0.5s ease;
+        }
+
+        #dashboardTopic{
+          text-align: center;
+          text-shadow: 1px 2px 4px #6f183540;
+          color: #571255;
+          font-weight: 900;
+        }
+
+        #dashboard:hover #dashboard-content {
+            transform: translateZ(0);
+        }
+
+        #logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #logo img {
+            width: 80px;
+            height: auto;
+            margin-right: 15px;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2em;
+        }
+
+        p {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        #dashboard-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, #937131, #8a4c88);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            cursor: pointer;
+            transform: translateZ(0);
+        }
+
+        .dashboard-card:hover {
+            background: linear-gradient(135deg, #e5a4cd, #9abdbb);
+            transform: translateZ(10px);
+        }
+
+        .dashboard-card h3 {
+            color: #201616;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .dashboard-card i {
+            color: #110505;
+            font-size: 36px;
+        }
+
+        #backgroundContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #backgroundContainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6) contrast(1.2);
+            transform: translateZ(-10px);
+        }
+    </style>
+</head>
+<body>
+    <div id="dashboard">
+        <div id="dashboard-content">
+            <div id="logo">
+                <img src="SolaceSphere logo.png" alt="site logo">
+                <h1>SolaceSphere</h1>
+            </div>
+            <p id="dashboardTopic">YOUR OWN SAFE SPACE <i class="fa-regular fa-face-grin-beam"></i></p>
+            <div id="dashboard-cards">
+                <div class="dashboard-card">
+                  <i class="fas fa-heart"></i>
+                  <h3>Mood Tracking</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fa-solid fa-person-praying"></i>
+                  <h3>Guided Meditation</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fa-solid fa-headset"></i>
+                  <h3>Let's play GAMES</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fa-solid fa-user-doctor"></i>
+                  <h3>Find Therapist</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fas fa-users"></i>
+                  <h3>Community Support</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fa-solid fa-book"></i>
+                  <h3>MY Journal</h3>
+                </div>
+                <div class="dashboard-card">
+                  <i class="fa-solid fa-hourglass-start"></i>
+                  <h3>Pomodoro</h3>
+                </div>
+            </div>
+        </div>
+        <div id="backgroundContainer">
+            <img src="Designer.png" alt="Background">
+        </div>
+    </div>
+</body>
+</html>

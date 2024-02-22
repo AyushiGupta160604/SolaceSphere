@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SolaceSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f0f0f0;
+        }
+        h1{
+            text-align: center;
+            color: rgb(42, 25, 2);
+        }
+        .m-1{
+            margin-inline-end: 1.6rem;
+        }
+        .p-3{
+          text-align: center;
+        }
+        .col-auto{
+          text-align: center;
+          margin-left: 0.5rem;
+        }
+        .row{
+          display: flex;
+          justify-content: center;
+          /* margin-inline: 35rem; */
+        }
+        .bg-body-tertiary{
+          background-color: rgba(164, 138, 138, 0.95);
+          text-align: center;
+          padding: 20px;
+        }
+        .text-uppercase{
+          text-transform: uppercase;
+          margin-right: 4rem;
+          font-weight:600;
+          text-shadow: 1px 1px 2px rgba(40, 2, 23, 0.5);
+        }
+        .mb-0{
+          margin-right: 4rem;
+          list-style: none;
+          font-weight:600;
+          text-shadow: 1px 1px 2px rgba(79, 26, 3, 0.5);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .text-body{
+          margin: 2rem;
+        }
+        #countryDropdown {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+            margin-top: 60px;
+        }
+
+        /* #countryDropdown {
+            margin-right: 10px;
+        } */
+
+        #siteName {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-right: 4%;
+        }
+
+        #navigation {
+            display: flex;
+            align-items: center;
+            margin-right: 400px;
+        }
+
+        .dropdown, .dropdown-content {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            min-width: 350px;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            color: #333;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-icon::after {
+            content: "▼ "; /*Unicode for down arrow */
+            margin-right: 40px;
+        }
+
+        #loginSignup {
+            display: flex;
+            align-items: center;
+        }
+
+        #loginButton,
+        #signupButton {
+            margin-left: 12px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #backgroundContainer {
+            position: relative;
+            background: linear-gradient(to bottom right, #d8e4d5, #ede1ed 50%, #cd7e8a 50%, #ffd700);
+            background-size: 100% 100%;
+            height: 500px; /* Adjust the height as needed */
+            padding: 20px;
+        }
+
+        #welcomeMessage {
+            width: 20%;
+            margin-left: 13%;
+            padding: 20px;
+            font-weight: 800;
+            font-size:xx-large;
+        }
+
+        #welcomeIntro{
+          margin-left: 12%;
+          font-weight:700;
+          text-shadow: 1px 1px 2px rgba(199, 108, 28, 0.5);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: large;
+        }
+
+        #ul1{
+          list-style: none;
+          }
+
+        #ul1 li::before {
+          content: '\2605'; /* Unicode for a solid star */
+          color: #c7579c;
+          display: inline-block;
+          width: 1rem;
+          margin-right: 0.5em;
+        }
+
+        #logo{
+          display: flex;
+          align-items: center;
+        }
+        img {
+            width: 100px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 10%; /* Adjust margin between image and text */
+        }
+        p {
+            margin: 0;
+        }
+
+        #welcomeMessage{
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        #imageContainer{
+            width: 35%;
+            padding-top: 120px;
+            padding-right: 210px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 8%;
+        }
+
+        #imageContainer img{
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Optional: Add border radius for a rounded look */
+        }
+
+        /* Login page */
+        .modal {
+            display: none;
+            position:fixed;
+            z-index: 1;
+            left: 25%;
+            top: 25%;
+            bottom: 25%;
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: transparent;
+            margin: 15% auto;
+            padding: 10px;
+            border: 2px solid #c24911;
+            width: 80%;
+            height: 50%;
+            background-image: url("login.jpeg");
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Already registered notification */
+        .notification {
+            display: none;
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="header">
+      <div id="countryDropdown">
+        <!-- <label for="countrySelect">Choose a Country:</label> -->
+        <select id="countrySelect" name="countrySelect">
+            <option value="ind">India</option>
+            <!-- <option value="">Canada</option>
+            <option value="">United Kingdom</option> -->
+        </select>
+      </div>
+
+      <div id="siteName">
+        <div id="logo">
+          <img src="SolaceSphere logo.png" alt="site logo" width="10px">
+          <p>SolaceSphere</p>
+        </div>
+      </div>
+
+      <div id="navigation">
+          <div class="dropdown">
+            <span class="dropdown-icon">Services</span>
+            <div class="dropdown-content">
+                <a href="#">Mood Tracking</a>
+                <a href="#">Guided Meditation</a>
+                <a href="#">Community Support</a>
+                <a href="#">Therapist Finder</a>
+                <a href="#">Relaxing games</a>
+                <a href="#">Pomodoro Technique</a>
+                <a href="#">My Journal</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <span class="dropdown-icon">Contact </span>
+            <div class="dropdown-content">
+                <p>Contact us at:<br><br>Email - 22cs3022@rgipt.ac.in<br><br>Ph - +91 9284309107</p>
+                <!-- Add more content as needed -->
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <span class="dropdown-icon">About </span>
+            <div class="dropdown-content" id="intro">
+                <p>Welcome to SolaceSphere – Your Oasis of Joy and Mental Well-Being!<br>Embark on an exhilarating journey towards happiness and self-discovery with us.At SolaceSphere, we're not just a platform; we're your dedicated companion on the quest for mental well-being.<br><br>
+                In this vibrant realm, we celebrate the uniqueness of your mental health journey. Our features are crafted with care, tailoring an individualized experience that transforms your personal oasis into a sanctuary of support. Imagine a community where individuals, having triumphed over their mental hurdles, radiate boundless joy and positivity. Now, picture yourself seamlessly becoming a cherished part of this tapestry of empowerment.
+                <br><br>It's a destination where your mental well-being takes center stage. Join us and embark on a thrilling adventure towards a brighter, happier you! </p>
+            </div>
+          </div>
+
+      </div>
+
+      <div id="loginSignup">
+          <button id="loginButton" onclick="openModal()">Login</button>
+          <button id="signupButton" onclick="openSignupModal()">Sign-Up</button>
+          <!-- Add this modification to your signup form -->
+      </div>
+    </div>
+    <div id="backgroundContainer">
+      <div id="welcomeMessage">
+        <p>Welcome to <br> our safe space </p>
+      </div>
+
+      <div id = "welcomeIntro">
+        <ul id = "ul1">
+          <li>Improved Life Style</li>
+          <br>
+          <li>Reduced Stress</li>
+          <br>
+          <li>Confident Personality</li>
+          <br>
+          <li>Better Coping Skills</li>
+          <br>
+          <li>Satisfied Life</li>
+        </ul>
+      </div>
+
+      <div id="imageContainer">
+        <img src="1 rec img.jpeg" alt="Image representing peace and victory">
+      </div>
+    </div>
+
+  <footer class="bg-body-tertiary text-center">
+    <div class="container p-4">
+      <section class="mb-4">
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.facebook.com/" role="button"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.twitter.com/" role="button"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.google.com/" role="button"
+          ><i class="fab fa-google"></i
+        ></a>
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.instagram.com/" role="button"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.linkedin.com/" role="button"
+          ><i class="fab fa-linkedin-in"></i
+        ></a>
+        <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="https://www.github.com/" role="button"
+          ><i class="fab fa-github"></i
+        ></a>
+        <br>
+        <br>
+      </section>
+
+      <section class="">
+        <form action="">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5 col-12">
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="form5Example24" class="form-control" />
+                <br>
+                <br>
+                <label class="form-label" for="form5Example24" > Your opinion matters!!</label>
+              </div>
+            </div>
+            <br>
+            <div class="col-auto">
+              <button data-mdb-ripple-init type="submit" class="btn btn-outline mb-4">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+      <section class="">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Important Links</h5>
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a class="text-body scroll-link" href="#intro">About us</a>
+                <br>
+                <br>
+              </li>
+              <li>
+                <a class="text-body" href="#!">Contact us</a>
+                <br>
+                <br>
+              </li>
+              <li>
+                <a class="text-body" href="#!">Privacy Policy</a>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2024 Copyright:
+      <a class="text-reset fw-bold" href="index.html">SolaceSphere</a>
+    </div>
+  </footer>
+
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <!-- Your login form goes here -->
+        <form id="loginForm">
+            <!-- Your login form fields go here -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <br>
+            <br>
+            <button type="button" onclick="submitForm()">Login</button>
+        </form>
+    </div>
+  </div>
+  <!-- Add this modal after the login modal in your HTML -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+      <span class="close" onclick="closeSignupModal()">&times;</span>
+      <!-- Add this div inside the signup modal content -->
+      <div id="signupNotification" class="notification"></div>
+
+      <form id="signupForm">
+          <br>
+          <br>
+          <br>
+          <br>
+          <label for="signupUsername">Username:</label>
+          <input type="text" id="signupUsername" name="signupUsername">
+          <br>
+          <br>
+          <label for="signupEmail">Email:</label>
+          <input type="email" id="signupEmail" name="signupEmail">
+          <br>
+          <br>
+          <label for="signupPassword">Password:</label>
+          <input type="password" id="signupPassword" name="signupPassword">
+          <br>
+          <br>
+          <!-- <button type="button" onclick="submitSignupForm()">Signup</button> -->
+          <!-- Add this modification to your signup form -->
+          <button type="button" onclick="checkExistingUser()">Signup</button>
+
+      </form>
+  </div>
+</div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
