@@ -138,7 +138,7 @@
             </div>
             <p id="dashboardTopic">YOUR OWN SAFE SPACE <i class="fa-regular fa-face-grin-beam"></i></p>
             <div id="dashboard-cards">
-                <div class="dashboard-card">
+                <div class="dashboard-card" onclick="openMoodTracker()">
                   <i class="fas fa-heart"></i>
                   <h3>Mood Tracking</h3>
                 </div>
@@ -146,7 +146,7 @@
                   <i class="fa-solid fa-person-praying"></i>
                   <h3>Guided Meditation</h3>
                 </div>
-                <div class="dashboard-card">
+                <div class="dashboard-card" id="gamesCard">
                   <i class="fa-solid fa-headset"></i>
                   <h3>Let's play GAMES</h3>
                 </div>
@@ -158,9 +158,9 @@
                   <i class="fas fa-users"></i>
                   <h3>Community Support</h3>
                 </div>
-                <div class="dashboard-card">
-                  <i class="fa-solid fa-book"></i>
-                  <h3>MY Journal</h3>
+                <div class="dashboard-card" id="journalCard" onclick="redirectToJournal()">
+                    <i class="fa-solid fa-book"></i>
+                    <h3>My Journal</h3>
                 </div>
                 <div class="dashboard-card">
                   <i class="fa-solid fa-hourglass-start"></i>
@@ -172,5 +172,6 @@
             <img src="Designer.png" alt="Background">
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
