@@ -323,7 +323,6 @@
       <div id="loginSignup">
           <button id="loginButton" onclick="openModal()">Login</button>
           <button id="signupButton" onclick="openSignupModal()">Sign-Up</button>
-          <!-- Add this modification to your signup form -->
       </div>
     </div>
     <div id="backgroundContainer">
@@ -444,7 +443,8 @@
             <input type="password" id="password" name="password">
             <br>
             <br>
-            <button type="button" onclick="submitForm()">Login</button>
+            <!-- <button type="button" onclick="submitForm()">Login</button> -->
+            <button type="button" onclick="loginUser()">Login</button>
         </form>
     </div>
   </div>
@@ -472,8 +472,6 @@
           <input type="password" id="signupPassword" name="signupPassword">
           <br>
           <br>
-          <!-- <button type="button" onclick="submitSignupForm()">Signup</button> -->
-          <!-- Add this modification to your signup form -->
           <button type="button" onclick="checkExistingUser()">Signup</button>
 
       </form>
