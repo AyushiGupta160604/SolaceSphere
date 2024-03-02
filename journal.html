@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="journal-container">
+        <div class="sidebar">
+            <button class="new-notebook-btn" onclick="createNewNotebook()">New Notebook</button>
+            <ul id="notebooks-list"></ul>
+        </div>
+        <div class="notebook">
+            <h1 id="notebook-title">Notebook Title</h1>
+            <div id="entries-list"></div>
+            <form id="entryForm">
+                <label for="entry">New Entry:</label>
+                <textarea id="entry" rows="4" placeholder="Start writing..."></textarea>
+                <button type="button" class="save-entry-btn" onclick="saveEntry()">Save Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
