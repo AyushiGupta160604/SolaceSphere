@@ -1,0 +1,104 @@
+<!-- gaming-dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolaceSphere Gaming Dashboard</title>
+    <!-- Add any additional stylesheets or scripts needed for the gaming dashboard here -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #571255;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        li:hover {
+            color: #937131;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #571255;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #937131;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Gaming Dashboard!</h1>
+
+    <!-- Display available games and high scores -->
+    <div id="games-list">
+        <h2>Available Games</h2>
+        <ul>
+            <li onclick="showGameDetails('Game 1')">Game 1</li>
+            <li onclick="showGameDetails('Game 2')">Game 2</li>
+            <!-- Add more games as needed -->
+        </ul>
+    </div>
+
+    <div id="high-scores">
+        <h2>High Scores</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Game 1</td>
+                    <td>Player 1</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>Game 2</td>
+                    <td>Player 2</td>
+                    <td>7500</td>
+                </tr>
+                <!-- Add more high scores as needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add any other elements or features of your gaming dashboard here -->
+
+    <!-- Add any necessary scripts at the end of the body if required -->
+    <script>
+        function showGameDetails(gameName) {
+            alert(`Details for ${gameName}`);
+            // You can replace the alert with actual interactive features based on the selected game.
+        }
+    </script>
+</body>
+</html>
+
