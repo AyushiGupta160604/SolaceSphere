@@ -1,104 +1,175 @@
-<!-- gaming-dashboard.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolaceSphere Gaming Dashboard</title>
-    <!-- Add any additional stylesheets or scripts needed for the gaming dashboard here -->
+    <title>Gaming Dashboard</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            color: #571255;
-        }
-
-        ul {
-            list-style-type: none;
             padding: 0;
         }
 
-        li {
-            margin-bottom: 10px;
+        .dashboard-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #f0f0f0;
+        }
+
+        header, main, footer {
+            padding: 20px;
+        }
+
+        nav {
+            margin-top: 0px;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        main {
+            padding-top: 10px;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        .game-card {
+            width: 50%;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        li:hover {
-            color: #937131;
+        .game-card:hover {
+            transform: scale(1.05);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .game-logo {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 10px;
         }
 
-        th, td {
-            border: 1px solid #571255;
-            padding: 8px;
-            text-align: left;
+        .game-info {
+            text-align: center;
         }
 
-        th {
-            background-color: #937131;
-            color: #fff;
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        #news {
+            overflow: hidden;
+            position: relative;
+            animation: slideIn 10s infinite;
+        }
+
+        @keyframes slideIn {
+            0% {
+                left: -90%;
+            }
+            25% {
+                left: -75%;
+            }
+            50% {
+                left: -50%;
+            }
+            75% {
+                left: -25%;
+            }
+            100% {
+                left: 0%;
+            }
+            100% {
+                left: 25%;
+            }
+            75% {
+                left: 50%;
+            }
+            50% {
+                left: 75%;
+            }
+            25% {
+                left: 100%;
+            }
+            0% {
+                right: -90%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Gaming Dashboard!</h1>
-
-    <!-- Display available games and high scores -->
-    <div id="games-list">
-        <h2>Available Games</h2>
-        <ul>
-            <li onclick="showGameDetails('Game 1')">Game 1</li>
-            <li onclick="showGameDetails('Game 2')">Game 2</li>
-            <!-- Add more games as needed -->
-        </ul>
+    <div class="dashboard-container">
+        <header>
+            <h1>Gaming Dashboard</h1>
+            <p>Welcome, Player Name!</p>
+        </header>
+        <section id="news">
+            <h3><em>Latest News/We just launched a game 😊</em></h3>
+        </section>
+        <nav>
+            <ul>
+                <li><a href="gaming_dashboard.html">Home</a></li>
+                <li><a href="#">Achievements</a></li>
+                <li><a href="dashboard.html">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section id="games">
+                <h2>Available Games</h2>
+                <div class="game-card" onclick="showGameInformation('Bubble Burst Mania')">
+                    <img class="game-logo" src="bubbleBurstMania.png" alt="Bubble Burst Mania Logo">
+                    <div class="game-info">
+                        <h3>Bubble Burst Mania</h3>
+                        <p>An exciting bubble shooter game. Cool yourself and burst all your problems like the bubbles.</p>
+                    </div>
+                </div>
+                <!-- <div class="game-card" onclick="showGameInformation('Game 2', 'Description for Game 2.')">
+                    <img class="game-logo" src="game2_logo.png" alt="Game 2 Logo">
+                    <div class="game-info">
+                        <h3>Game 2</h3>
+                        <p>Description for Game 2.</p>
+                    </div>
+                </div> -->
+                <!-- Add more game cards as needed -->
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 SolaceSphere. All rights reserved.</p>
+        </footer>
     </div>
 
-    <div id="high-scores">
-        <h2>High Scores</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Game</th>
-                    <th>Player</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Game 1</td>
-                    <td>Player 1</td>
-                    <td>5000</td>
-                </tr>
-                <tr>
-                    <td>Game 2</td>
-                    <td>Player 2</td>
-                    <td>7500</td>
-                </tr>
-                <!-- Add more high scores as needed -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Add any other elements or features of your gaming dashboard here -->
-
-    <!-- Add any necessary scripts at the end of the body if required -->
     <script>
-        function showGameDetails(gameName) {
-            alert(`Details for ${gameName}`);
-            // You can replace the alert with actual interactive features based on the selected game.
+        function showGameInformation(gameName) {
+            window.location.href = "bubbleShooterRules.html";
         }
     </script>
 </body>
 </html>
-
