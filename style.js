@@ -479,9 +479,11 @@ window.onload = function() {
             // Check if there are bubbles in the bottom row
             if (level.tiles[i][level.rows-1].type != -1) {
                 // Game over
-                nextBubble();
-                setGameState(gamestates.gameover);
-                return true;
+                // nextBubble();
+                // setGameState(gamestates.gameover);
+                // return true;
+                alert("Game over, redirecting to dashboard");
+                window.location.href = "gaming_dashboard.html";
             }
         }
 
