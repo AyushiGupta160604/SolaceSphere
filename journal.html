@@ -24,5 +24,61 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        let notebooks = [];
+        let currentNotebookIndex;
+
+        function createNewNotebook() {
+            const notebookTitle = prompt("Enter the title for your new notebook:");
+            if (notebookTitle) {
+                const newNotebook = {
+                    title: notebookTitle,
+                    entries: []
+                };
+
+                notebooks.push(newNotebook);
+                displayNotebooks();
+                setCurrentNotebook(newNotebook);
+            }
+        }
+
+        function displayNotebooks() {
+            const notebooksList = document.getElementById("notebooks-list");
+            notebooksList.innerHTML = "";
+
+            notebooks.forEach((notebook, index) => {
+                const notebookItem = document.createElement("li");
+                notebookItem.textContent = notebook.title;
+                notebookItem.onclick = () => setCurrentNotebook(notebook, index);
+                notebooksList.appendChild(notebookItem);
+            });
+        }
+
+        function setCurrentNotebook(notebook, index) {
+            currentNotebookIndex = index;
+            document.getElementById("notebook-title").textContent = notebook.title;
+            displayEntries(notebook.entries);
+        }
+
+        function displayEntries(entries) {
+            const entriesList = document.getElementById("entries-list");
+            entriesList.innerHTML = "";
+
+            entries.forEach(entry => {
+                const entryItem = document.createElement("div");
+                entryItem.textContent = entry;
+                entriesList.appendChild(entryItem);
+            });
+        }
+
+        function saveEntry() {
+            const entryText = document.getElementById("entry").value.trim();
+            if (entryText) {
+                notebooks[currentNotebookIndex].entries.push(entryText);
+                displayEntries(notebooks[currentNotebookIndex].entries);
+                document.getElementById("entry").value = ""; // Clear the entry input
+            }
+        }
+    </script>
 </body>
 </html>
