@@ -88,3 +88,12 @@ function redirectToDashboard() {
 function redirectToJournal() {
     window.location.href = 'journal.html';
 }
+function openTherapistFinder(){
+    window.location.href = 'therapist.html';
+}
+function openGuidedMeditation(){
+    window.location.href = 'guidedMeditation.html';
+}
+function openGoalSettingAndReminder(){
+    window.location.href = 'goalsetter.html';
+}
