@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTP Verification</title>
+    <style>
+        body {
+            background: radial-gradient(circle, rgb(180, 97, 180) 0%, rgb(26, 81, 109) 5%, rgb(38, 187, 167) 100%);
+            font-family: 'Source Code Pro', monospace;
+            color: #29adb2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 0 15px #29adb2;
+            text-align: center;
+            width: 360px;
+        }
+
+        .container h2 {
+            margin: 0 0 20px;
+        }
+
+        .otp-input, .email-input {
+            background: transparent;
+            border: 2px solid #29adb2;
+            border-radius: 5px;
+            color: #29adb2;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .verify-btn,.resend-btn{
+            cursor: pointer;
+            border: 2px solid #29adb2;
+            background: transparent;
+            color: #29adb2;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .verify-btn:hover,.resend-btn:hover {
+            background: #29adb2;
+            color: rgb(30, 22, 22);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form id= "verify" action="/verify" action="/resendOTP" method="POST">
+        <h2>OTP Verification</h2>
+        <input type="text" id="email" class="email-input" placeholder="Enter email">
+        <input type="text" id="otp" class="otp-input" maxlength="6" placeholder="Enter OTP">
+        <button class="verify-btn" type="submit">Verify</button>
+        <button class="resend-btn" type="submit">Resend OTP</button>
+    </form>
+</div>
+
+</body>
+</html>
