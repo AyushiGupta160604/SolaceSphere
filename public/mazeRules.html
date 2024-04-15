@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maze Goal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ccc2c2;
+            background-image: url("./images and audios/bubbleShooterbg2.png");
+            background-size: cover ;
+        }
+
+        main {
+            max-width: 60%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: Lavender;
+        }
+
+        p{
+            line-height: 1.6;
+            color: #ffffff;
+        }
+        .bsRules{
+            color: #ffffff;
+        }
+        h2{
+            color: #9a2626;
+        }
+        strong{
+            color:bisque;
+        }
+        .play-btn{
+            background-color: #9a2626;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .play-btn:hover{
+            background-color: #b06eab;
+        }
+
+        .icon{
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <section class = "bsRules">
+            <h1>Maze Goal</h1>
+            <p><h2>Introduction:</h2>
+                Welcome to Maze Goal, the ultimate maze game that will keep you entertained for hours! Immerse yourself in a world of challenging puzzles, and endless fun. Are you ready to embark on this challenging adventure?
+                <br>
+                <h2>How to Play:</h2>
+                <strong>Objective:</strong>
+                Your goal is to move the basketball towards the net by clearing confusing maze pathway.
+                The lesser moves you take the better your analysis of moves is!
+                <br>
+                <strong>Scoring Baskets:</strong>
+                Analyze each step clearly and move the basketball towards the net in least possible moves.
+                To moves, use arrow keys use the mouse.
+                You can choose the level of game from easy to extreme.
+                <br>
+                <strong>Score:</strong>
+                Keep track of your performance with the help of your number of moves that will be displayed after each game.
+                <br>
+                <h2>Ready to Score a Basket?</h2>
+                Get ready for an addictive and visually stunning Maze challenge! Find your smart self with intricate puzzles, and aim for the best of your performance game by game. Maze goal is here to test your skills and bring endless joy to your gaming moments. Good luck, and may you each basket in your life!
+            </p>
+        </section>
+        <button class="play-btn" onclick="openMaze()">
+            <i class="fa-solid fa-gamepad">&nbsp;&nbsp;&nbsp;Play Game</i>
+            <!-- <i class="fa-solid fa-headset">Play Game</i> -->
+        </button>
+    </main>
+    <script>
+        function openMaze(){
+            window.location.href = "MazeGame.html";
+        }
+    </script>
+
+</body>
+</html>

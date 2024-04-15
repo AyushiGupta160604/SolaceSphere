@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker - SolaceSphere</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url("./images and audios/mood.png") center/cover no-repeat fixed;
+        }
+
+        #moodTracker {
+            background-color: transparent;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #571255;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #moodForm {
+            margin-bottom: 20px;
+        }
+
+        #moodDescription {
+            font-size: 1em;
+            margin-right: 10px;
+        }
+
+        #addMoodButton,
+        #saveMoodButton,
+        #removeMoodButton {
+            font-size: 1em;
+            padding: 8px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            margin: 5px;
+            color: white;
+        }
+
+        #addMoodButton {
+            background-color: #40b2cb;
+            transition: background-color 0.5s ease-in-out;
+        }
+        #addMoodButton:hover {
+            background-color: #033649fd;
+        }
+
+        #saveMoodButton {
+            background-color: #4CAF50;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #saveMoodButton:hover{
+            background-color: #046d08;
+        }
+
+        #removeMoodButton {
+            background-color: #F44336;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #removeMoodButton:hover {
+            background-color: #680700;
+        }
+
+        #moodChartContainer {
+            height: 300px;
+        }
+
+        #moodSummary {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="moodTracker">
+        <h1>Mood Tracker</h1>
+        <div id="moodForm">
+            <label for="moodDescription">How do you feel today? Choose an emoji:</label>
+            <select id="moodDescription">
+                <option value="😊">Happy</option>
+                <option value="😢">Sad</option>
+                <option value="😡">Angry</option>
+                <option value="😞">Disappointed</option>
+                <option value="😌">Satisfied</option>
+            </select>
+            <button id="addMoodButton" onclick="addMood()">Add Mood</button>
+            <button id="saveMoodButton" onclick="saveMood()">Save Mood</button>
+            <button id="removeMoodButton" onclick="removeMood()">Remove Mood</button>
+        </div>
+        <div id="moodChartContainer">
+            <canvas id="moodChart"></canvas>
+        </div>
+        <div id="moodSummary"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let moodData = {
+            labels: [],
+            datasets: [{
+                label: 'Mood Level',
+                data: [],
+                borderColor: "rgba(0, 0, 0, 1)",
+                borderWidth: 2,
+                fill: false
+            }]
+        };
+
+        const moodChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales:{
+                y: {
+                    beginAtZero:true,
+                    max: 10
+                }
+            },
+        };
+
+
+        const moodChartCanvas = document.getElementById('moodChart').getContext('2d');
+        const moodChart = new Chart(moodChartCanvas, {
+            type: "line",
+            data: moodData,
+            options: moodChartOptions
+        });
+
+        function addMood() {
+            const moodDescription = document.getElementById('moodDescription').value;
+            const moodLevel = prompt('On a scale of 1 to 10, how intense is your mood?');
+
+            if(moodLevel > 10 || moodLevel< 0){
+                alert("Please enter the number in valid range!");
+            }
+            else if (moodLevel !== null && !isNaN(moodLevel)) {
+                moodData.labels.push(moodDescription);
+                moodData.datasets[0].data.push(parseInt(moodLevel, 10));
+
+                moodChart.update(); // Update the chart with new data
+
+                updateMoodSummary();
+            }
+        }
+
+        function saveMood() {
+            localStorage.setItem('moodData', JSON.stringify(moodData));
+            alert('Mood saved for the next entry.');
+        }
+
+        function removeMood() {
+            moodData.labels.pop();
+            moodData.datasets[0].data.pop();
+
+            moodChart.update(); // Update the chart with new data
+
+            updateMoodSummary();
+        }
+
+        function updateMoodSummary() {
+            const averageMood = calculateAverageMood();
+            const moodSummary = document.getElementById('moodSummary');
+            moodSummary.innerHTML = `Your average mood: ${averageMood}`;
+
+            if (averageMood >= 7) {
+                moodSummary.style.color = "#00FF00"; // Green for positive mood
+                moodSummary.style.fontWeight = "900";
+            } else if (averageMood >= 4) {
+                moodSummary.style.color = '#FFC107'; // Yellow for neutral mood
+            } else {
+                moodSummary.style.color = '#F44336'; // Red for negative mood
+            }
+        }
+
+        function calculateAverageMood() {
+            const totalMood = moodData.datasets[0].data.reduce((sum, mood) => sum + mood, 0);
+            return totalMood / moodData.datasets[0].data.length || 0;
+        }
+
+        // Load saved mood data on page load
+        const savedMoodData = localStorage.getItem('moodData');
+        if (savedMoodData) {
+            moodData = JSON.parse(savedMoodData);
+            moodChart.update();
+            updateMoodSummary();
+        }
+    </script>
+</body>
+</html>

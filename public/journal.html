@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journal</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="journal-container">
+        <div class="sidebar">
+            <button class="new-notebook-btn" onclick="createNewNotebook()">New Notebook</button>
+            <ul id="notebooks-list"></ul>
+        </div>
+        <div class="notebook">
+            <h1 id="notebook-title">Notebook Title</h1>
+            <div id="entries-list"></div>
+            <form id="entryForm">
+                <label for="entry">New Entry:</label>
+                <textarea id="entry" rows="4" placeholder="Start writing..."></textarea>
+                <button type="button" class="save-entry-btn" onclick="saveEntry()">Save Entry</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let notebooks = [];
+        let currentNotebookIndex;
+
+        function createNewNotebook() {
+            const notebookTitle = prompt("Enter the title for your new notebook:");
+            if (notebookTitle) {
+                const newNotebook = {
+                    title: notebookTitle,
+                    entries: []
+                };
+
+                notebooks.push(newNotebook);
+                displayNotebooks();
+                setCurrentNotebook(newNotebook);
+            }
+        }
+
+        function displayNotebooks() {
+            const notebooksList = document.getElementById("notebooks-list");
+            notebooksList.innerHTML = "";
+
+            notebooks.forEach((notebook, index) => {
+                const notebookItem = document.createElement("li");
+                notebookItem.textContent = notebook.title;
+                notebookItem.onclick = () => setCurrentNotebook(notebook, index);
+                notebooksList.appendChild(notebookItem);
+            });
+        }
+
+        function setCurrentNotebook(notebook, index) {
+            currentNotebookIndex = index;
+            document.getElementById("notebook-title").textContent = notebook.title;
+            displayEntries(notebook.entries);
+        }
+
+        function displayEntries(entries) {
+            const entriesList = document.getElementById("entries-list");
+            entriesList.innerHTML = "";
+
+            entries.forEach(entry => {
+                const entryItem = document.createElement("div");
+                entryItem.textContent = entry;
+                entriesList.appendChild(entryItem);
+            });
+        }
+
+        function saveEntry() {
+            const entryText = document.getElementById("entry").value.trim();
+            if (entryText) {
+                notebooks[currentNotebookIndex].entries.push(entryText);
+                displayEntries(notebooks[currentNotebookIndex].entries);
+                document.getElementById("entry").value = ""; // Clear the entry input
+            }
+        }
+    </script>
+</body>
+</html>

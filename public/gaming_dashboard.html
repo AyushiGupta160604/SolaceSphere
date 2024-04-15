@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d; /* Dark background */
+            color: #fff; /* Light text */
+        }
+
+        .dashboard-container {
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #1a1a1a; /* Dark container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #444; /* Dark hover background */
+        }
+
+        main {
+            padding-top: 20px;
+        }
+
+        .game-card {
+            width: 45%;
+            border: 1px solid #333; /* Dark border */
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display:inline-flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Light box shadow */
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Light box shadow on hover */
+        }
+
+        .game-logo {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .game-info {
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 0 0 10px 10px;
+        }
+        #maze{
+            align-items: center;
+            margin-left: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Gaming Dashboard</h1>
+            <p>Welcome, Player Name!</p>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="gaming_dashboard.html">Home</a></li>
+                <!-- <li><a href="#">Achievements</a></li> -->
+                <li><a href="dashboard.html">Logout</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section id="games">
+                <h2>Available Games</h2>
+                <div class="game-card" onclick="showGameInformation1()">
+                    <img class="game-logo" src="./images and audios/bubbleBurstMania.png" alt="Bubble Burst Mania Logo">
+                    <div class="game-info">
+                        <h3>Bubble Burst Mania</h3>
+                        <p>An exciting bubble shooter game. Cool yourself and burst all your problems like the bubbles.</p>
+                    </div>
+                </div>
+                <div class="game-card" onclick="showGameInformation2()">
+                    <img class="game-logo" src="./images and audios/balloon_popup.png" alt="Balloon Popup Logo">
+                    <div class="game-info">
+                        <h3>Balloon popup</h3>
+                        <p> Just a relaxing exercise like game. Simply tap on screen to enjoy flying balloons and relax as it fly! </p>
+                    </div>
+                </div>
+                <div id = "maze" class="game-card" onclick="showGameInformation3()">
+                    <img class="game-logo" src="./images and audios/maze.png" alt="Maze goal Logo">
+                    <div class="game-info">
+                        <h3>Maze goal</h3>
+                        <p> Make a basket by dribbling your brain. </p>
+                    </div>
+                </div>
+                <!-- Add more game cards as needed -->
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 SolaceSphere. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showGameInformation1(){
+            window.location.href = "bubbleShooterRules.html";
+        }
+        function showGameInformation2(){
+            window.location.href = "balloonPopupRules.html";
+        }
+        function showGameInformation3(){
+            window.location.href = "mazeRules.html";
+        }
+    </script>
+</body>
+</html>

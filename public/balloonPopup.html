@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no">
+	<script src="https://cdn.jsdelivr.net/gh/photonstorm/phaser@master/dist/phaser.min.js"></script>
+	<title>Balloon Popup</title>
+    <style>
+        html{
+	        user-select: none;
+	        overflow: hidden;
+        }
+        body{
+	        margin: 0;
+	        padding: 0;
+	        background: #000000;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function preload(){
+            this.load.image("background", "https://i.postimg.cc/mgSFLKdK/background.png");
+	        this.load.image("balloon", "https://i.postimg.cc/Xv7Bpxmq/balloon.png");
+        }
+
+        function create(){
+	        this.add.image(200, 300, "background").setInteractive().on("pointerdown", (pointer) => {
+		    this.physics.add.image(pointer.x, pointer.y, "balloon").setGravityY(-300);
+	    });
+
+        window.alert("Click anywhere on the screen!");
+
+    }
+
+        new Phaser.Game({
+	        type: Phaser.AUTO,
+	        width: 400,
+	        height: 600,
+	        scale: {
+		        mode: Phaser.Scale.FIT,
+		        autoCenter: Phaser.Scale.CENTER_BOTH
+	        },
+	        scene: {
+		        preload: preload,
+		        create: create
+	        },
+	        physics: {
+		        default: "arcade",
+		        arcade:	{
+			        debug: false
+		        }
+	        }
+        });
+    </script>
+</body>
+</html>

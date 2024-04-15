@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Technique Timer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/moments/2.29.1/moment.min.css" integrity="sha384-xFVp0N2xUd7JukPYzdzTlH6CN5l7d+v0Gw+tq3uStjInbk9gy8mP6hzUzIt+nWtK" crossorigin="anonymous">
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!-- Orbitron Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #36393f;
+            color: #f0f6fc;
+            background-image: url("./images and audios/PomodoroBg.png");
+            background-size: cover;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: rgb(83, 126, 91);
+        }
+        #timer {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: black;
+        }
+        #clock {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            color: rgb(39, 53, 41);
+        }
+        #buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        #startBtn {
+            background-color: #4caf50;
+            color: white;
+        }
+        #startBtn:hover {
+            background-color: rgb(29, 118, 77);
+        }
+        #resetBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        #resetBtn:hover {
+            background-color: #9a361b;
+        }
+        #smallBreakBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        #smallBreakBtn:hover {
+            background-color: #206694;
+        }
+        #longBreakBtn {
+            background-color: #e67e22;
+            color: white;
+        }
+        #longBreakBtn:hover {
+            background-color: #a84300;
+        }
+        button:hover{
+            transform: scale(1.05);
+            background-color: #b06eab;
+        }
+        #musicPlayer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        audio {
+            margin-top: 10px;
+            width: 300px;
+        }
+        h2{
+            color: #4caf50;
+        }
+        .clock-wrapper{
+            line-height: 2;
+        }
+            /* header */
+        .clock-wrapper h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4em;
+            color: #2c0834;
+        }
+
+        /* buttons */
+        .clock-wrapper button {
+            cursor: pointer;
+            margin: 0 5px;
+            padding: 10px 30px;
+            background: transparent;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: 0;
+            color: black;
+            transition: all ease 300ms;
+            margin: 10px 0;
+        }
+        .clock-wrapper button:hover {
+            color: #333;
+            background: rgb(161, 183, 166);
+        }
+
+        /* center content vertically and horizontally */
+        .table {
+            display: table;
+            width: 100%;
+            height: 100%;
+            margin-left: 85%;
+        }
+        .cell {
+            display: table-cell;
+            vertical-align: middle;
+            cursor: default;
+        }
+
+        /* variable misc classes */
+        .hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Pomodoro Technique Timer</h1>
+    <div class="table clock-wrapper">
+        <div class="cell">
+          <h2 id="clock" class="clock"></h2>
+          <select id="hours"></select>
+          <select id="minutes"></select>
+          <select id="seconds"></select>
+          <select id="ampm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+          <p>
+            <button id="snooze" class="hide">Snooze</button>
+            <button id="startstop">Set Alarm</button>
+          </p>
+        </div>
+      </div>
+    <!-- <div id="timer">25:00</div>
+    <div id="clock"></div> -->
+    <div id="buttons">
+        <button id="startBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+        <button id="smallBreakBtn">Small Break</button>
+        <button id="longBreakBtn">Long Break</button>
+    </div>
+
+    <div id="musicPlayer">
+        <h4 style="padding-left: 60px; color: #4c794d;">Listen to your playlist</h4>
+        <audio id="musicPlayer" controls>
+            <source src="./images and audios/O_maahi.mp3" type="audio/mp3">
+            Your browser does not support the audio tag.
+        </audio>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha384-DzjkI7DNkphVbKTSkexC5IcZgVQEL6Oa4PPsjnOAKj7gmU6+8pMnWIeXbTn8Ed/k" crossorigin="anonymous"></script>
+    <script>
+
+        function updateTimerDisplay(minutes, seconds) {
+            const minutesStr = String(minutes).padStart(2, '0');
+            const secondsStr = String(seconds).padStart(2, '0');
+            document.getElementById('timer').innerText = `${minutesStr}:${secondsStr}`;
+        }
+
+        function updateClock() {
+            const now = moment().format('h:mm:ss a');
+            document.getElementById('clock').innerText = now;
+        }
+
+        function startTimer(minutes, seconds) {
+            isRunning = true;
+            timer = setInterval(() => {
+                if (minutes === 0 && seconds === 0) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    playAlarm();
+                } else {
+                    if (seconds === 0) {
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
+                    }
+                    updateTimerDisplay(minutes, seconds);
+                }
+            }, 1000);
+        }
+
+        // function resetTimer() {
+        //     clearInterval(timer);
+        //     isRunning = false;
+        //     updateTimerDisplay(defaultMinutes, defaultSeconds);
+        // }
+        function resetTimer() {
+            clearInterval(timer);
+            isRunning = false;
+            updateTimerDisplay(defaultMinutes, defaultSeconds);
+
+        // Set alarm for the next 25 minutes
+            const now = moment();
+            const nextAlarmTime = now.add(25, 'minutes');
+            const hours = nextAlarmTime.format('h');
+            const minutes = nextAlarmTime.format('mm');
+            const ampm = nextAlarmTime.format('A');
+
+            document.getElementById('hours').value = hours;
+            document.getElementById('minutes').value = minutes;
+            document.getElementById('seconds').value = '00';
+            document.getElementById('ampm').value = ampm;
+
+            // Clear any existing alarms
+            sound.pause();
+            alarm = "00:00:00 AM";
+            startstop.textContent = "Set Alarm";
+            snooze.className = "hide";
+            activeAlarm = false;
+        }
+
+
+        function handleBreakButtonClick(minutes) {
+            if (!isRunning) {
+                resetTimer();
+                startTimer(minutes, 0);
+            }
+        }
+
+        function playAlarm() {
+            const alarmAudio = document.getElementById('alarmAudio');
+            alarmAudio.play();
+        }
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            if (!isRunning) {
+                startTimer(defaultMinutes, defaultSeconds);
+            }
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            resetTimer();
+        });
+
+        document.getElementById('smallBreakBtn').addEventListener('click', () => {
+            handleBreakButtonClick(5);
+        });
+
+        document.getElementById('longBreakBtn').addEventListener('click', () => {
+            handleBreakButtonClick(10);
+        });
+        // set our variables
+var time, alarm, currentH, currentM,
+    activeAlarm = false,
+    sound = new Audio("https://freesound.org/data/previews/316/316847_4939433-lq.mp3");
+
+/*
+  audio sound source: https://freesound.org/people/SieuAmThanh/sounds/397787/
+*/
+
+// loop alarm
+sound.loop = true;
+
+// define a function to display the current time
+function displayTime() {
+  var now = new Date();
+  time = now.toLocaleTimeString();
+  clock.textContent = time;
+  // time = "1:00:00 AM";
+  // watch for alarm
+  if (time === alarm) {
+    sound.play();
+    // show snooze button
+    snooze.className = "";
+  }
+  setTimeout(displayTime, 1000);
+}
+displayTime();
+
+// add option values relative towards time
+function addMinSecVals(id) {
+  var select = id;
+  var min = 59;
+
+  for (i = 0; i <= min; i++) {
+    // defined as new Option(text, value)
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i < 10 ? "0" + i : i);
+  }
+}
+function addHours(id) {
+  var select = id;
+  var hour = 12;
+
+  for (i = 1; i <= hour; i++) {
+    // defined as new Option(text, value)
+    select.options[select.options.length] = new Option(i < 10 ? "0" + i : i, i);
+  }
+}
+addMinSecVals(minutes);
+addMinSecVals(seconds);
+addHours(hours);
+
+// set and clear alarm
+startstop.onclick = function() {
+  // set the alarm
+  if (activeAlarm === false) {
+    hours.disabled = true;
+    minutes.disabled = true;
+    seconds.disabled = true;
+    ampm.disabled = true;
+    alarm = hours.value + ":" + minutes.value + ":" + seconds.value + " " + ampm.value;
+    this.textContent = "Clear Alarm";
+    activeAlarm = true;
+  } else {
+    // clear the alarm
+    hours.disabled = false;
+    minutes.disabled = false;
+    seconds.disabled = false;
+    ampm.disabled = false;
+
+    sound.pause();
+    alarm = "00:00:00 AM";
+    this.textContent = "Set Alarm";
+    // hide snooze button
+    snooze.className = "hide";
+    activeAlarm = false;
+  }
+};
+
+// snooze for 5 minutes
+snooze.onclick = function() {
+  if (activeAlarm === true) {
+    // grab the current hour and minute
+    currentH = time.substr(0, time.length - 9);
+    currentM = time.substr(currentH.length + 1, time.length - 8);
+
+    if (currentM >= "55") {
+      minutes.value = "00";
+      hours.value = parseInt(currentH) + 1;
+    } else {
+      if (parseInt(currentM) + 5 <= 9) {
+        minutes.value = "0" + parseInt(currentM + 5);
+      } else {
+        minutes.value = parseInt(currentM) + 5;
+      }
+    }
+
+    // hide snooze button
+    snooze.className = "hide";
+
+    // now reset alarm
+    startstop.click();
+    startstop.click();
+  } else {
+    return false;
+  }
+};
+
+        // setInterval(updateClock, 1000);
+
+        // updateTimerDisplay(defaultMinutes, defaultSeconds);
+        // updateClock();
+    </script>
+</body>
+</html>

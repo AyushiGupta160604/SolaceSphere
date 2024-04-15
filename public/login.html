@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("./images and audios/signup.png");
+            background-size: cover;
+            background-position: center;
+        }
+        form {
+            background-color: transparent;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: auto;
+            animation: bounceInDown 7s ease forwards;
+        }
+        h1 {
+            text-align: center;
+            color: #000000;
+        }
+        input[type="text"],
+        input[type="password"],
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+            animation: rotateY 1s ease-in-out forwards;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+        }
+        button[type="submit"] {
+            background-color: #744294;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #28053e;
+        }
+
+        @keyframes bounceInDown {
+            0% {
+                transform: translateY(-500px);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(30px);
+            }
+            80% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotateY {
+            from {
+                transform: rotateY(90deg);
+                opacity: 0;
+            }
+            to {
+                transform: rotateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="LoginForm" action="/login" method="POST">
+        <h1>Login</h1>
+        <input type="text" id="username" name="username" placeholder="Username" required><br>
+        <input type="password" id="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+</body>
+</html>

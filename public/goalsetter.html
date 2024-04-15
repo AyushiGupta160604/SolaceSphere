@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goal Setting and Reminder App</title>
+<link rel="stylesheet" href="./css/goalStyle.css">
+</head>
+<body>
+<audio id="reminderSound" src="./images and audios/alarm.mp3"></audio>
+<div class="container">
+    <h1>Goal Setting and Reminder</h1>
+    <input type="text" id="goalInput" placeholder="Enter your goal">
+    <input type="datetime-local" id="dateInput">
+    <button onclick="setReminder()">Set Reminder</button>
+    <ul id="goalList"></ul>
+</div>
+<script src="goalscript.js"></script>
+</body>
+</html>

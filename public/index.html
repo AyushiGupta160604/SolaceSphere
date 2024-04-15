@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SolaceSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f0f0f0;
+        }
+        h1{
+            text-align: center;
+            color: rgb(42, 25, 2);
+        }
+        .m-1{
+            margin-inline-end: 1.6rem;
+        }
+        .p-3{
+          text-align: center;
+        }
+        .col-auto{
+          text-align: center;
+          margin-left: 0.5rem;
+        }
+        .row{
+          display: flex;
+          justify-content: center;
+          /* margin-inline: 35rem; */
+        }
+        .bg-body-tertiary{
+          background-color: rgba(164, 138, 138, 0.95);
+          text-align: center;
+          padding: 20px;
+        }
+        .text-uppercase{
+          text-transform: uppercase;
+          margin-right: 4rem;
+          font-weight:600;
+          text-shadow: 1px 1px 2px rgba(40, 2, 23, 0.5);
+        }
+        .mb-0{
+          margin-right: 4rem;
+          list-style: none;
+          font-weight:600;
+          text-shadow: 1px 1px 2px rgba(79, 26, 3, 0.5);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .text-body{
+          margin: 2rem;
+        }
+        #countryDropdown {
+            position: fixed;
+            left: 10px;
+            top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #fff;
+            border-bottom: 1px solid #ccc;
+            margin-top: 60px;
+        }
+
+        /* #countryDropdown {
+            margin-right: 10px;
+        } */
+
+        #siteName {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-right: 4%;
+        }
+
+        #navigation {
+            display: flex;
+            align-items: center;
+            margin-right: 400px;
+        }
+
+        .dropdown, .dropdown-content {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #cd7e8a ;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            min-width: 350px;
+            cursor: pointer;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            text-shadow: 1px 1px 2px rgba(216, 210, 207, 0.5);
+            color: #333;
+            text-align: left;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            cursor: pointer;
+        }
+
+        .dropdown-icon::after {
+            content: "▼ "; /*Unicode for down arrow */
+            margin-right: 40px;
+            cursor: pointer;
+        }
+
+        #loginSignup {
+            display: flex;
+            align-items: center;
+        }
+
+        #loginButton,
+        #signupButton {
+            margin-left: 12px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #backgroundContainer {
+            position: relative;
+            background: linear-gradient(to bottom right, #d8e4d5, #ede1ed 50%, #cd7e8a 50%, #ffd700);
+            background-size: 100% 100%;
+            height: 500px; /* Adjust the height as needed */
+            padding: 20px;
+        }
+
+        #welcomeMessage {
+            width: 20%;
+            margin-left: 13%;
+            padding: 20px;
+            font-weight: 800;
+            font-size:xx-large;
+        }
+
+        #welcomeIntro{
+          margin-left: 12%;
+          font-weight:700;
+          text-shadow: 1px 1px 2px rgba(199, 108, 28, 0.5);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: large;
+        }
+
+        #ul1{
+          list-style: none;
+          }
+
+        #ul1 li::before {
+          content: '\2605'; /* Unicode for a solid star */
+          color: #c7579c;
+          display: inline-block;
+          width: 1rem;
+          margin-right: 0.5em;
+        }
+
+        #logo{
+          display: flex;
+          align-items: center;
+        }
+        img {
+            width: 100px;
+            height: auto;
+            margin-right: 10%;
+        }
+        p {
+            margin: 0;
+        }
+
+        #welcomeMessage{
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        #imageContainer{
+            width: 35%;
+            padding-top: 120px;
+            padding-right: 210px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            right: 8%;
+        }
+
+        #imageContainer img{
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Optional: Add border radius for a rounded look */
+        }
+
+        /* Login page */
+        .modal {
+            display: none;
+            position:fixed;
+            z-index: 1;
+            left: 25%;
+            top: 25%;
+            bottom: 25%;
+            width: 50%;
+            height: 100%;
+            overflow: auto;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .modal-content {
+            background-color: transparent;
+            margin: 15% auto;
+            padding: 10px;
+            border: 2px solid #c24911;
+            width: 80%;
+            height: 50%;
+            background-image: url("login.jpeg");
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Already registered notification */
+        .notification {
+            display: none;
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        /* in footer section */
+        .social-icons a {
+            color: #3b043a;
+            margin: 0 10px;
+            font-size: 1.5rem;
+        }
+        .mb-4{
+          margin-top: 20px;
+        }
+        .linkTo-Content{
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="header">
+      <div id="countryDropdown">
+        <!-- <label for="countrySelect">Choose a Country:</label> -->
+        <select id="countrySelect" name="countrySelect">
+            <option value="ind">India</option>
+            <!-- <option value="">Canada</option>
+            <option value="">United Kingdom</option> -->
+        </select>
+      </div>
+
+      <div id="siteName">
+        <div id="logo">
+          <img src="./images and audios/SolaceSphere logo.png" alt="site logo" width="10px">
+          <p>SolaceSphere</p>
+        </div>
+      </div>
+
+      <div id="navigation">
+          <div class="dropdown">
+            <span class="dropdown-icon">Services</span>
+            <div class="dropdown-content">
+                <a href="aboutMoodTracking.html">Mood Tracking</a>
+                <a href="aboutGuidedMeditation.html">Guided Meditation</a>
+                <!-- <a href="#">Community Support</a> -->
+                <a href="aboutTherapistFinder.html">Therapist Finder</a>
+                <a href="aboutRelaxingGames.html">Relaxing games</a>
+                <a href="aboutPomodoro.html">Pomodoro Technique</a>
+                <a href="aboutJournal.html">My Journal</a>
+                <a href="aboutgoalSetting.html">Goal Settings and Reminders</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <span class="dropdown-icon">Contact </span>
+            <div class="dropdown-content">
+              <p>Contact us at:<br><br>Email - 22cs3022@rgipt.ac.in<br><br>Ph - +91 9284309107</p>
+                <!-- Add more content as needed -->
+            </div>
+          </div>
+
+          <div class="linkTo">
+            <div class="linkTo-Content">
+              <a class="linkTo-Content" href="aboutUs.html">About us</a>
+            </div>
+          </div>
+      </div>
+
+      <div id="loginSignup">
+          <button id="loginButton" onclick="openModal()">Login</button>
+          <button id="signupButton" onclick="openSignupModal()">Sign-Up</button>
+      </div>
+    </div>
+    <div id="backgroundContainer">
+      <div id="welcomeMessage">
+        <p>Welcome to <br> our safe space </p>
+      </div>
+
+      <div id = "welcomeIntro">
+        <ul id = "ul1">
+          <li>Improved Life Style</li>
+          <br>
+          <li>Reduced Stress</li>
+          <br>
+          <li>Confident Personality</li>
+          <br>
+          <li>Better Coping Skills</li>
+          <br>
+          <li>Satisfied Life</li>
+        </ul>
+      </div>
+
+      <div id="imageContainer">
+        <img src="./images and audios/1 rec img.jpeg" alt="Image representing peace and victory">
+      </div>
+    </div>
+
+  <footer class="bg-body-tertiary text-center">
+    <div class="container p-4">
+      <section class="mb-4">
+        <div class="social-icons">
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-google"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+      </section>
+
+      <section class="">
+        <form action="">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5 col-12">
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input type="text" id="form5Example24" class="form-control" />
+                <br>
+                <br>
+                <label class="form-label" for="form5Example24" > Your opinion matters!!</label>
+              </div>
+            </div>
+            <br>
+            <div class="col-auto">
+              <button data-mdb-ripple-init type="submit" class="btn btn-outline mb-4">
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+      <section class="">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Important Links</h5>
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a class="text-body scroll-link" href="aboutUs.html">About us</a>
+                <br>
+                <br>
+              </li>
+              <li>
+                <a class="text-body" href="contactUs.html">Contact us</a>
+                <br>
+                <br>
+              </li>
+              <li>
+                <a class="text-body" href="privacy.html">Privacy Policy</a>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2024 Copyright:
+      <a class="text-reset fw-bold" href="index.html">SolaceSphere</a>
+    </div>
+  </footer>
+
+<script>
+  window.embeddedChatbotConfig = {
+  chatbotId: "GshOy8euiEXn9SITd65Ee",
+  domain: "www.chatbase.co"
+  }
+  </script>
+  <script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="GshOy8euiEXn9SITd65Ee"
+  domain="www.chatbase.co"
+  defer>
+  </script>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

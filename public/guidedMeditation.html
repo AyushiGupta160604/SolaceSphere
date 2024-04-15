@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guided Meditation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            background-image: url("images and audios/ytbg.png");
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .video-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .video {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .video iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .video:hover iframe {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #cc0000;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guided Meditation Videos</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for guided meditation videos...">
+            <button id="searchButton" class="search-button">Search</button>
+        </div>
+
+        <div class="video-container" id="videoContainer">
+            <!-- Videos will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchQuery = document.getElementById('searchInput').value.trim();
+            if (searchQuery !== '') {
+                searchYouTube(searchQuery);
+            }
+        });
+
+        function searchYouTube(query) {
+            var apiKey = 'AIzaSyAEuMakpmrtXs_rdUDyb2Yn_jgtNvkDU64';
+            var maxResults = 9;
+
+            var url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}&maxResults=${maxResults}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Clear previous search results
+                    document.getElementById('videoContainer').innerHTML = '';
+
+                    // Loop through the search results and create iframe elements for each video
+                    data.items.forEach(item => {
+                        if (item.id.kind === 'youtube#video') {
+                            var videoId = item.id.videoId;
+                            var iframe = document.createElement('iframe');
+                            iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}`);
+                            iframe.setAttribute('width', '100%');
+                            iframe.setAttribute('height', '200');
+                            iframe.setAttribute('frameborder', '0');
+                            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+                            iframe.setAttribute('allowfullscreen', '');
+                            var videoDiv = document.createElement('div');
+                            videoDiv.classList.add('video');
+                            videoDiv.appendChild(iframe);
+                            document.getElementById('videoContainer').appendChild(videoDiv);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching YouTube API:', error));
+        }
+    </script>
+</body>
+</html>
