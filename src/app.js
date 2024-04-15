@@ -12,8 +12,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(static_path))
 
-
-// This is the password: 'nmqg ntzg dfse yqai'
 // Creating a Nodemailer transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
