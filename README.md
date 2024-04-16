@@ -15,6 +15,7 @@ A list of technologies used within the project:
 * [Node.js]
 * [Express.js]
 * [MongoDB]
+* [NodeMailer]
   
 ## Dependencies
 ***
@@ -22,6 +23,7 @@ Dependencies to be installed to run the code on your local host:
 * You should have node.js installed
 * Install express.js latest by npm i express@latest or simply npm i express
 * Install mongoose by npm i mongoose
+* Similarly install NodeMailer for sending otp and verification mail, crypto for generating OTP
 * You can install nodemon for your convienence to stop restarting the server again and again. 
 
 To run the code the move to SolaceSphere/src folder and run node app.js 
