@@ -1,6 +1,23 @@
 # SolaceSphere
 SolaceSphere is a mental wellbeing web application aspiring to help individuals with mental health issues. 
+Project Status -> Almost done
 
+*** 
+### Screenshot
+![Home page](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
+
+## Technologies
+***
+A list of technologies used within the project:
+* [HTML5]
+* [CSS3]
+* [Javascript]
+* [Node.js]
+* [Express.js]
+* [MongoDB]
+  
+## Dependencies
+***
 Dependencies to be installed to run the code on your local host:
 * You should have node.js installed
 * Install express.js latest by npm i express@latest or simply npm i express
