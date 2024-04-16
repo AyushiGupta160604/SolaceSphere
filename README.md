@@ -3,7 +3,12 @@ SolaceSphere is a mental wellbeing web application aspiring to help individuals 
 
 *** 
 ### Screenshot
-![Home page](https://www.united-internet.de/fileadmin/user_upload/Brands/Downloads/Logo_IONOS_by.jpg)
+The Home page would look something like this i.e. whenever the website is opened it will give such view.
+![Home page](<img width="959" alt="image" src="https://github.com/AyushiGupta160604/SolaceSphere/assets/133566741/60bec6a5-778a-4943-92a5-43b5af8f6c42">
+)
+
+The signup page looks something like this. Login page is similar to this.
+![Signup page](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Signup%20page.png)
 
 ## Technologies
 ***
