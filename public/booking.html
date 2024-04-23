@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
+  <style>
+        body {
+            background: linear-gradient(to right top, #43cea2, #185a9d);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .therapists-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #d6cdda;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin: 15% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        input[type="datetime-local"],button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #43cea2;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="datetime-local"]:hover,button:hover {
+            background-color: #185a9d;
+        }
+
+        .therapist-image {
+            width: 100%;
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .therapist-card {
+            position: relative;
+            background-color: #d6cdda;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 20px;
+            margin-top: 30px;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .therapist-card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .doctor-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .therapist-card:hover .doctor-info {
+            opacity: 1;
+        }
+
+        .doctor-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .doctor-qualification {
+            color: #fff;
+            font-size: 14px;
+        }
+
+  </style>
+</head>
+
+<body>
+    <div class="therapists-container" id="therapistsContainer">
+        <!-- Therapist cards will be dynamically added here -->
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book Appointment</h2>
+            <p>Select a date and time:</p>
+            <input type="datetime-local" id="appointmentDateTime">
+            <button id="bookAppointmentBtn">Book Appointment</button>
+            <div id="paypal-button-container"></div>
+        </div>
+    </div>
+
+  <script>
+        const therapists = [
+            { name: "Dr. Alok Sarin", rating: 4.8, availability: ["Monday 9am-5pm", "Wednesday 10am-3pm"], qualification: "Ph.D. in Clinical Psychology", img: "alok"},
+            { name: "Dr. Anjali Chhabria", rating: 4.5, availability: ["Tuesday 8am-12pm", "Thursday 1pm-6pm"], qualification: "Licensed Professional Counselor (LPC)", img: "anjali1"},
+            { name: "Dr. Anjali Rajan", rating: 4.2, availability: ["Monday 1pm-6pm", "Friday 9am-12pm"], qualification: "Licensed Clinical Social Worker (LCSW)", img: "anjali2"},
+            { name: "Dr. Anuradha Varma", rating: 4.6, availability: ["Wednesday 1pm-5pm", "Thursday 10am-2pm"], qualification: "Licensed Marriage and Family Therapist (LMFT)", img: "anuradha"},
+            { name: "Dr. Shekhar Janaki", rating: 4.7, availability: ["Tuesday 9am-12pm", "Friday 2pm-6pm"], qualification: "Ph.D. in Counseling Psychology", img: "shekhar"},
+            { name: "Dr. Dev Dixit", rating: 4.9, availability: ["Monday 8am-11am", "Thursday 2pm-5pm"], qualification: "Licensed Psychologist (Psy.D.)", img: "dev"},
+            { name: "Dr. Ashi Porwal", rating: 4.3, availability: ["Wednesday 9am-1pm", "Friday 10am-3pm"], qualification: "Master of Social Work (MSW)", img: "ashi"},
+            { name: "Dr. Raman Gupta", rating: 4.4, availability: ["Tuesday 1pm-4pm", "Thursday 9am-12pm"], qualification: "Ph.D. in Clinical Psychology", img: "raman"},
+            { name: "Dr. Samir Parikh", rating: 4.7, availability: ["Monday 10am-2pm", "Wednesday 2pm-6pm"], qualification: "Licensed Professional Counselor (LPC)", img: "samir"},
+            { name: "Dr. Dhawal Makwana", rating: 4.8, availability: ["Tuesday 10am-3pm", "Thursday 1pm-5pm"], qualification: "Licensed Marriage and Family Therapist (LMFT)", img: "dhawal"}
+        ];
+
+        function displayTherapists() {
+            const therapistsContainer = document.getElementById("therapistsContainer");
+            therapists.forEach(therapist => {
+                const card = document.createElement("div");
+                card.classList.add("therapist-card");
+                card.innerHTML = `<div class="therapist-image" style="background-image: url('images/${therapist.name.replace(/\s+/g, '-').toLowerCase()}.jpg');"></div>
+                <h3>${therapist.name}</h3>
+                <p>Rating: ${therapist.rating}</p>
+                <p>Availability: ${therapist.availability.join(", ")}</p>
+                <div class="doctor-info">
+                <img class="doctor-image" src="./images and audios/${therapist.img}.webp" alt="${therapist.name}">
+                <p class="doctor-qualification">Qualification: ${therapist.qualification}</p>
+                </div>`;
+                card.addEventListener("click", () => openModal(therapist.name));
+                therapistsContainer.appendChild(card);
+            });
+        }
+
+        window.onload = displayTherapists;
+
+        function openModal(therapistName) {
+            const modal = document.getElementById("modal");
+            const closeBtn = document.getElementsByClassName("close")[0];
+            modal.style.display = "block";
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        document.getElementById("bookAppointmentBtn").addEventListener("click", bookAppointment);
+        document.getElementById("bookAppointmentBtn").addEventListener("click", openPayment);
+        function bookAppointment() {
+            const selectedDateTime = document.getElementById("appointmentDateTime").value;
+            console.log(selectedDateTime);
+        }
+        function openPayment(){
+            const paypalButton = document.getElementById('paypal-button-container');
+            if (!paypalButton.innerHTML) {
+                paypal.Buttons({
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '10.00', // Adjust this value based on your appointment fee
+                                    currency_code: 'USD' // Set the currency code according to your preference
+                            }
+                        }]
+                    });
+                },
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        // You can add further actions here, like saving the appointment details or redirecting to a confirmation page.
+                    });
+                }
+                }).render(paypalButton)
+            } else {
+                alert("Payment is required to book the appointment.");
+            }
+        }
+
+
+
+  </script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+</body>
+</html>
