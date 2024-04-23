@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming Dashboard</title>
+    <meta name="description" content="Gaming dashboard of user">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -103,13 +104,11 @@
 <body>
     <div class="dashboard-container">
         <header>
-            <h1>Gaming Dashboard</h1>
-            <p>Welcome, Player Name!</p>
+            <p id="welcome-message">Welcome, <span id="username-placeholder">Player Name</span>!</p>
         </header>
         <nav>
             <ul>
                 <li><a href="gaming_dashboard.html">Home</a></li>
-                <!-- <li><a href="#">Achievements</a></li> -->
                 <li><a href="dashboard.html">Logout</a></li>
             </ul>
         </nav>
@@ -117,21 +116,21 @@
             <section id="games">
                 <h2>Available Games</h2>
                 <div class="game-card" onclick="showGameInformation1()">
-                    <img class="game-logo" src="./images and audios/bubbleBurstMania.png" alt="Bubble Burst Mania Logo">
+                    <img class="game-logo" src="./images and audios/bubbleBurstMania.webp" alt="Bubble Burst Mania Logo">
                     <div class="game-info">
                         <h3>Bubble Burst Mania</h3>
                         <p>An exciting bubble shooter game. Cool yourself and burst all your problems like the bubbles.</p>
                     </div>
                 </div>
                 <div class="game-card" onclick="showGameInformation2()">
-                    <img class="game-logo" src="./images and audios/balloon_popup.png" alt="Balloon Popup Logo">
+                    <img class="game-logo" src="./images and audios/balloon_popup.webp" alt="Balloon Popup Logo">
                     <div class="game-info">
                         <h3>Balloon popup</h3>
                         <p> Just a relaxing exercise like game. Simply tap on screen to enjoy flying balloons and relax as it fly! </p>
                     </div>
                 </div>
                 <div id = "maze" class="game-card" onclick="showGameInformation3()">
-                    <img class="game-logo" src="./images and audios/maze.png" alt="Maze goal Logo">
+                    <img class="game-logo" src="./images and audios/maze.webp" alt="Maze goal Logo">
                     <div class="game-info">
                         <h3>Maze goal</h3>
                         <p> Make a basket by dribbling your brain. </p>
@@ -146,6 +145,17 @@
     </div>
 
     <script>
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = prompt("Enter your user name!")
+                const usernamePlaceholder = document.getElementById('username-placeholder');
+                usernamePlaceholder.textContent = response;
+            } catch (error) {
+                console.error('Error fetching username:', error);
+            }
+        });
+
+
         function showGameInformation1(){
             window.location.href = "bubbleShooterRules.html";
         }
