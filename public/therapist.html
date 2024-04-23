@@ -9,22 +9,59 @@
             height: 400px;
             width: 100%;
         }
+
         body{
             background: radial-gradient(circle, #fff, rosybrown);
         }
+
         h1{
             text-align: center;
         }
+
+        #bookingButton {
+            background-color: #875f9e;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+            animation: pulse 1.5s infinite;
+            margin-left: 42%;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.95); }
+        }
+
+        #bookingButton:hover {
+            background-color: #4a0074;
+        }
+
     </style>
 </head>
 <body>
     <h1>Therapist Finder</h1>
-    <br>
-    <br>
-
     <div id="map"></div>
+    <br>
+    <br>
+    <div>
+        <button id="bookingButton" onclick="redirectToBooking()">Book Appointment</button>
+    </div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=your_api_key" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOkSIafdivsaeJhD0qAOqjiCs5bt6HlHc&libraries=places&callback=initMap" async defer></script>
     <script src="therapist.js"></script>
+    <script>
+        function redirectToBooking() {
+            window.location.href = "booking.html";
+        }
+    </script>
 </body>
 </html>
