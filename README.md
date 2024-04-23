@@ -33,9 +33,10 @@ SolaceSphere is a mental wellbeing web application aspiring to help individuals 
 #### Therapist Finder(Used Google Maps and Google Places APIs)[on clicking on Book appoinment button you will be redirected to a booking page where you can book appointment and pay for the same which involved usage of PayPal API]
 ![Therapist Finder](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Therapist%20finder.png)
 
-#### Appointment(When you will hover over any card you will image and Qualification of doctor else you will see name, rating and availability)
+### Appointment
+#### When you will hover over any card you will see image and Qualification of doctor/therapist else you will see name, rating and availability
 ![Appoinment Page](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/booking%20appointment(1).png)
-## Used paypal api for payment purpose
+#### Used PayPal api for payment purpose
 ![Appoinment Page](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/booking%20appointment(2).png)
 
 ## Technologies
