@@ -9,11 +9,11 @@ SolaceSphere is a mental wellbeing web application aspiring to help individuals 
 #### The signup page looks something like this. Login page is similar to this:
 ![Signup page](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Signup%20page.png)
 
-#### Now after login/ signup(with account verification) the user will be redirected to dashboard that looks like this:
-![Dashboard](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Dashboard.png)
-
 #### There's OTP Verification applied to make it even more secure {Sorry you can't get in without it!!}
 ![OTP VERIFICATION PAGE](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/OTP%20VERIFICATION%20PAGE.png)
+
+#### Now after login/ signup(with account verification) the user will be redirected to dashboard that looks like this:
+![Dashboard](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Dashboard.png)
 
 #### Mood tracker page:
 ![Mood Tracker Page](https://github.com/AyushiGupta160604/SolaceSphere/blob/main/Project%20look/Mood%20Tracker.png)
